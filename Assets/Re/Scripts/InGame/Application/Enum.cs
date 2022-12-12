@@ -4,5 +4,6 @@ namespace Re.InGame
     {
         None,
         SetUp,
+        Input,
     }
 }

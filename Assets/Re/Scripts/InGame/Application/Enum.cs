@@ -7,5 +7,6 @@ namespace Re.InGame
         Input,
         Judge,
         Back,
+        Goal,
     }
 }

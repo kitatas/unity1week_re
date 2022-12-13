@@ -34,10 +34,12 @@ namespace Re.InGame.Presentation.Controller
 
             if (_goalView.isGoal)
             {
-                // TODO: stage clear!!
+                return GameState.Goal;
             }
-
-            return GameState.Input;
+            else
+            {
+                return GameState.Input;
+            }
         }
     }
 }

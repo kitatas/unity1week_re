@@ -15,14 +15,17 @@ namespace Re.InGame.Installer
         [SerializeField] private DragHandleView dragHandleView = default;
         [SerializeField] private GoalView goalView = default;
         [SerializeField] private PlayerView playerView = default;
+        [SerializeField] private ShotCountView shotCountView = default;
 
         protected override void Configure(IContainerBuilder builder)
         {
             // Entity
+            builder.Register<ShotCountEntity>(Lifetime.Scoped);
             builder.Register<StateEntity>(Lifetime.Scoped);
             builder.Register<StopPointsEntity>(Lifetime.Scoped);
 
             // UseCase
+            builder.Register<ShotCountUseCase>(Lifetime.Scoped);
             builder.Register<StateUseCase>(Lifetime.Scoped);
             builder.Register<StopPointUseCase>(Lifetime.Scoped);
 
@@ -35,6 +38,7 @@ namespace Re.InGame.Installer
             builder.Register<StateController>(Lifetime.Scoped);
 
             // Presenter
+            builder.RegisterEntryPoint<ShotCountPresenter>();
             builder.RegisterEntryPoint<StatePresenter>();
 
             // View
@@ -42,6 +46,7 @@ namespace Re.InGame.Installer
             builder.RegisterInstance<DragHandleView>(dragHandleView);
             builder.RegisterInstance<GoalView>(goalView);
             builder.RegisterInstance<PlayerView>(playerView);
+            builder.RegisterInstance<ShotCountView>(shotCountView);
         }
     }
 }

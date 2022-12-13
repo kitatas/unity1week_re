@@ -8,13 +8,15 @@ namespace Re.InGame.Presentation.Controller
 {
     public sealed class InputState : BaseState
     {
+        private readonly ShotCountUseCase _shotCountUseCase;
         private readonly StopPointUseCase _stopPointUseCase;
         private readonly DragHandleView _dragHandleView;
         private readonly PlayerView _playerView;
 
-        public InputState(StopPointUseCase stopPointUseCase,
+        public InputState(ShotCountUseCase shotCountUseCase, StopPointUseCase stopPointUseCase,
             DragHandleView dragHandleView, PlayerView playerView)
         {
+            _shotCountUseCase = shotCountUseCase;
             _stopPointUseCase = stopPointUseCase;
             _dragHandleView = dragHandleView;
             _playerView = playerView;
@@ -44,6 +46,7 @@ namespace Re.InGame.Presentation.Controller
                         _stopPointUseCase.Push(_playerView.position, _playerView.rotation);
 
                         _playerView.Shot(dragDiff);
+                        _shotCountUseCase.Increase();
 
                         return GameState.Judge;
                     }

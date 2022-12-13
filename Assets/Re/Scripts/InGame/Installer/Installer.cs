@@ -12,6 +12,7 @@ namespace Re.InGame.Installer
     public sealed class Installer : LifetimeScope
     {
         [SerializeField] private DragHandleView dragHandleView = default;
+        [SerializeField] private GoalView goalView = default;
         [SerializeField] private PlayerView playerView = default;
 
         protected override void Configure(IContainerBuilder builder)
@@ -27,6 +28,7 @@ namespace Re.InGame.Installer
             // Controller
             builder.Register<BackState>(Lifetime.Scoped);
             builder.Register<InputState>(Lifetime.Scoped);
+            builder.Register<JudgeState>(Lifetime.Scoped);
             builder.Register<SetUpState>(Lifetime.Scoped);
             builder.Register<StateController>(Lifetime.Scoped);
 
@@ -35,6 +37,7 @@ namespace Re.InGame.Installer
 
             // View
             builder.RegisterInstance<DragHandleView>(dragHandleView);
+            builder.RegisterInstance<GoalView>(goalView);
             builder.RegisterInstance<PlayerView>(playerView);
         }
     }

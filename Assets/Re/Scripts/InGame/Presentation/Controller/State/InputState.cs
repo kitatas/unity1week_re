@@ -45,11 +45,7 @@ namespace Re.InGame.Presentation.Controller
 
                         _playerView.Shot(dragDiff);
 
-                        // 停止待ち
-                        await UniTask.WaitUntil(_playerView.IsStop, cancellationToken: token);
-                        
-                        // TODO: to judge
-                        return GameState.SetUp;
+                        return GameState.Judge;
                     }
                 }
                 else if (Input.GetMouseButtonDown(1) && _stopPointUseCase.IsStack())

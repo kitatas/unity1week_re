@@ -5,6 +5,7 @@ namespace Re.InGame
         None,
         SetUp,
         Input,
+        Judge,
         Back,
     }
 }

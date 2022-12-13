@@ -1,5 +1,6 @@
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using Re.InGame.Domain.UseCase;
 using Re.InGame.Presentation.View;
 using Input = UnityEngine.Input;
 
@@ -7,11 +8,14 @@ namespace Re.InGame.Presentation.Controller
 {
     public sealed class InputState : BaseState
     {
+        private readonly StopPointUseCase _stopPointUseCase;
         private readonly DragHandleView _dragHandleView;
         private readonly PlayerView _playerView;
 
-        public InputState(DragHandleView dragHandleView, PlayerView playerView)
+        public InputState(StopPointUseCase stopPointUseCase,
+            DragHandleView dragHandleView, PlayerView playerView)
         {
+            _stopPointUseCase = stopPointUseCase;
             _dragHandleView = dragHandleView;
             _playerView = playerView;
         }
@@ -36,6 +40,9 @@ namespace Re.InGame.Presentation.Controller
                     var dragDiff = await _dragHandleView.SetUpAsync(_playerView.position, token);
                     if (dragDiff.magnitude * 0.01f > 1.0f)
                     {
+                        // 移動直前の位置を保持しておく
+                        _stopPointUseCase.Push(_playerView.position, _playerView.rotation);
+
                         _playerView.Shot(dragDiff);
 
                         // 停止待ち
@@ -45,9 +52,9 @@ namespace Re.InGame.Presentation.Controller
                         return GameState.SetUp;
                     }
                 }
-                else if (Input.GetMouseButtonDown(1))
+                else if (Input.GetMouseButtonDown(1) && _stopPointUseCase.IsStack())
                 {
-                    // TODO: undo的な
+                    return GameState.Back;
                 }
 
                 await UniTask.Yield(token);

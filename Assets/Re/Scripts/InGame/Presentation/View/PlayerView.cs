@@ -16,6 +16,14 @@ namespace Re.InGame.Presentation.View
 
         public Vector2 position => transform.position;
 
+        public Vector3 rotation => transform.rotation.eulerAngles;
+
+        public void SetPoint(Data.Entity.PointEntity entity)
+        {
+            transform.position = entity.position;
+            transform.rotation = Quaternion.Euler(entity.rotation);
+        }
+
         public void Shot(Vector2 direction)
         {
             

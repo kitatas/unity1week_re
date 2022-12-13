@@ -18,11 +18,14 @@ namespace Re.InGame.Installer
         {
             // Entity
             builder.Register<StateEntity>(Lifetime.Scoped);
+            builder.Register<StopPointsEntity>(Lifetime.Scoped);
 
             // UseCase
             builder.Register<StateUseCase>(Lifetime.Scoped);
+            builder.Register<StopPointUseCase>(Lifetime.Scoped);
 
             // Controller
+            builder.Register<BackState>(Lifetime.Scoped);
             builder.Register<InputState>(Lifetime.Scoped);
             builder.Register<SetUpState>(Lifetime.Scoped);
             builder.Register<StateController>(Lifetime.Scoped);

@@ -1,16 +1,19 @@
 using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using Re.InGame.Domain.UseCase;
 using Re.InGame.Presentation.View;
 
 namespace Re.InGame.Presentation.Controller
 {
     public sealed class GoalState : BaseState
     {
+        private readonly StageUseCase _stageUseCase;
         private readonly ClearView _clearView;
 
-        public GoalState(ClearView clearView)
+        public GoalState(StageUseCase stageUseCase, ClearView clearView)
         {
+            _stageUseCase = stageUseCase;
             _clearView = clearView;
         }
 
@@ -34,7 +37,7 @@ namespace Re.InGame.Presentation.Controller
             await _clearView.HideAsync(animationTime, token);
 
             // TODO: 最終ステージである場合
-            if (true)
+            if (_stageUseCase.IsAllStageClear())
             {
                 // TODO: game clear
                 UnityEngine.Debug.Log($"game clear!!");
@@ -42,6 +45,7 @@ namespace Re.InGame.Presentation.Controller
             }
             else
             {
+                _stageUseCase.Increase();
                 return GameState.SetUp;
             }
         }

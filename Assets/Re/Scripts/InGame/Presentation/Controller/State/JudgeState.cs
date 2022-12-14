@@ -6,12 +6,10 @@ namespace Re.InGame.Presentation.Controller
 {
     public sealed class JudgeState : BaseState
     {
-        private readonly GoalView _goalView;
         private readonly PlayerView _playerView;
 
-        public JudgeState(GoalView goalView, PlayerView playerView)
+        public JudgeState(PlayerView playerView)
         {
-            _goalView = goalView;
             _playerView = playerView;
         }
 
@@ -19,8 +17,6 @@ namespace Re.InGame.Presentation.Controller
 
         public override async UniTask InitAsync(CancellationToken token)
         {
-            _goalView.Init();
-
             await UniTask.Yield(token);
         }
 
@@ -29,10 +25,10 @@ namespace Re.InGame.Presentation.Controller
             // 停止待ち
             await UniTask.WaitUntil(_playerView.IsStop, cancellationToken: token);
 
-            // 1フレ待ち
-            await UniTask.DelayFrame(1, cancellationToken: token);
+            // 当たり判定確認待ち
+            await UniTask.DelayFrame(2, cancellationToken: token);
 
-            if (_goalView.isGoal)
+            if (_playerView.isGoal)
             {
                 return GameState.Goal;
             }

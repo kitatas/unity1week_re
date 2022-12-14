@@ -1,3 +1,5 @@
+using UniRx;
+using UniRx.Triggers;
 using UnityEngine;
 
 namespace Re.InGame.Presentation.View
@@ -9,9 +11,23 @@ namespace Re.InGame.Presentation.View
 
         private readonly float _shotPowerRate = 0.05f;
 
+        public bool isGoal { get; private set; }
+
         public void Init()
         {
             _rigidbody = GetComponent<Rigidbody2D>();
+            isGoal = false;
+
+            this.OnTriggerEnter2DAsObservable()
+                .Merge(this.OnTriggerStay2DAsObservable())
+                .Where(x => x.TryGetComponent(out GoalView goalView))
+                .Subscribe(_ => isGoal = true)
+                .AddTo(this);
+
+            this.OnTriggerExit2DAsObservable()
+                .Where(x => x.TryGetComponent(out GoalView goalView))
+                .Subscribe(x => isGoal = false)
+                .AddTo(this);
         }
 
         public Vector2 position => transform.position;

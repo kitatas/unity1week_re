@@ -16,7 +16,6 @@ namespace Re.InGame.Installer
         [SerializeField] private StageTable stageTable = default;
         [SerializeField] private ClearView clearView = default;
         [SerializeField] private DragHandleView dragHandleView = default;
-        [SerializeField] private GoalView goalView = default;
         [SerializeField] private PlayerView playerView = default;
         [SerializeField] private ShotCountView shotCountView = default;
         [SerializeField] private StageLevelView stageLevelView = default;
@@ -57,7 +56,6 @@ namespace Re.InGame.Installer
             // View
             builder.RegisterInstance<ClearView>(clearView);
             builder.RegisterInstance<DragHandleView>(dragHandleView);
-            builder.RegisterInstance<GoalView>(goalView);
             builder.RegisterInstance<PlayerView>(playerView);
             builder.RegisterInstance<ShotCountView>(shotCountView);
             builder.RegisterInstance<StageLevelView>(stageLevelView);

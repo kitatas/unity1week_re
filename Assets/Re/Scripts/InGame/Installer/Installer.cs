@@ -1,4 +1,6 @@
+using Re.InGame.Data.DataStore;
 using Re.InGame.Data.Entity;
+using Re.InGame.Domain.Repository;
 using Re.InGame.Domain.UseCase;
 using Re.InGame.Presentation.Controller;
 using Re.InGame.Presentation.Presenter;
@@ -11,21 +13,31 @@ namespace Re.InGame.Installer
 {
     public sealed class Installer : LifetimeScope
     {
+        [SerializeField] private StageTable stageTable = default;
         [SerializeField] private ClearView clearView = default;
         [SerializeField] private DragHandleView dragHandleView = default;
         [SerializeField] private GoalView goalView = default;
         [SerializeField] private PlayerView playerView = default;
         [SerializeField] private ShotCountView shotCountView = default;
+        [SerializeField] private StageLevelView stageLevelView = default;
 
         protected override void Configure(IContainerBuilder builder)
         {
+            // DataStore
+            builder.RegisterInstance<StageTable>(stageTable);
+
             // Entity
             builder.Register<ShotCountEntity>(Lifetime.Scoped);
+            builder.Register<StageLevelEntity>(Lifetime.Scoped);
             builder.Register<StateEntity>(Lifetime.Scoped);
             builder.Register<StopPointsEntity>(Lifetime.Scoped);
 
+            // Repository
+            builder.Register<StageRepository>(Lifetime.Scoped);
+
             // UseCase
             builder.Register<ShotCountUseCase>(Lifetime.Scoped);
+            builder.Register<StageUseCase>(Lifetime.Scoped);
             builder.Register<StateUseCase>(Lifetime.Scoped);
             builder.Register<StopPointUseCase>(Lifetime.Scoped);
 
@@ -39,6 +51,7 @@ namespace Re.InGame.Installer
 
             // Presenter
             builder.RegisterEntryPoint<ShotCountPresenter>();
+            builder.RegisterEntryPoint<StageLevelPresenter>();
             builder.RegisterEntryPoint<StatePresenter>();
 
             // View
@@ -47,6 +60,7 @@ namespace Re.InGame.Installer
             builder.RegisterInstance<GoalView>(goalView);
             builder.RegisterInstance<PlayerView>(playerView);
             builder.RegisterInstance<ShotCountView>(shotCountView);
+            builder.RegisterInstance<StageLevelView>(stageLevelView);
         }
     }
 }

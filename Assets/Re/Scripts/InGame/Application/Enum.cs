@@ -9,4 +9,12 @@ namespace Re.InGame
         Back,
         Goal,
     }
+
+    public enum DifficultyType
+    {
+        None,
+        Easy,
+        Normal,
+        Hard,
+    }
 }

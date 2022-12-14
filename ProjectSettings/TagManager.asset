@@ -41,3 +41,15 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Stage
+    uniqueID: 4248685453
+    locked: 0
+  - name: Goal
+    uniqueID: 785849417
+    locked: 0
+  - name: Player
+    uniqueID: 2059113159
+    locked: 0
+  - name: UI
+    uniqueID: 1769912911
+    locked: 0

@@ -17,6 +17,7 @@ namespace Re.InGame.Installer
         [SerializeField] private ClearView clearView = default;
         [SerializeField] private DragHandleView dragHandleView = default;
         [SerializeField] private PlayerView playerView = default;
+        [SerializeField] private PointStackView pointStackView = default;
         [SerializeField] private ShotCountView shotCountView = default;
         [SerializeField] private StageLevelView stageLevelView = default;
 
@@ -49,6 +50,7 @@ namespace Re.InGame.Installer
             builder.Register<StateController>(Lifetime.Scoped);
 
             // Presenter
+            builder.RegisterEntryPoint<PointStackPresenter>();
             builder.RegisterEntryPoint<ShotCountPresenter>();
             builder.RegisterEntryPoint<StageLevelPresenter>();
             builder.RegisterEntryPoint<StatePresenter>();
@@ -57,6 +59,7 @@ namespace Re.InGame.Installer
             builder.RegisterInstance<ClearView>(clearView);
             builder.RegisterInstance<DragHandleView>(dragHandleView);
             builder.RegisterInstance<PlayerView>(playerView);
+            builder.RegisterInstance<PointStackView>(pointStackView);
             builder.RegisterInstance<ShotCountView>(shotCountView);
             builder.RegisterInstance<StageLevelView>(stageLevelView);
         }

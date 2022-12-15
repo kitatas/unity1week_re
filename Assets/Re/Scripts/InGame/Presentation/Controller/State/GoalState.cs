@@ -3,6 +3,7 @@ using System.Threading;
 using Cysharp.Threading.Tasks;
 using Re.InGame.Domain.UseCase;
 using Re.InGame.Presentation.View;
+using Object = UnityEngine.Object;
 
 namespace Re.InGame.Presentation.Controller
 {
@@ -28,7 +29,9 @@ namespace Re.InGame.Presentation.Controller
 
         public override async UniTask<GameState> TickAsync(CancellationToken token)
         {
-            await UniTask.Yield(token);
+            // ゴール消滅演出
+            var goal = Object.FindObjectOfType<GoalView>();
+            await goal.DisappearAsync(token);
 
             // ステージクリア演出
             var animationTime = 0.5f;

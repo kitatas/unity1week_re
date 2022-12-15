@@ -8,14 +8,16 @@ namespace Re.InGame.Presentation.Controller
 {
     public sealed class InputState : BaseState
     {
+        private readonly BackCountUseCase _backCountUseCase;
         private readonly ShotCountUseCase _shotCountUseCase;
         private readonly StopPointUseCase _stopPointUseCase;
         private readonly DragHandleView _dragHandleView;
         private readonly PlayerView _playerView;
 
-        public InputState(ShotCountUseCase shotCountUseCase, StopPointUseCase stopPointUseCase,
+        public InputState(BackCountUseCase backCountUseCase, ShotCountUseCase shotCountUseCase, StopPointUseCase stopPointUseCase,
             DragHandleView dragHandleView, PlayerView playerView)
         {
+            _backCountUseCase = backCountUseCase;
             _shotCountUseCase = shotCountUseCase;
             _stopPointUseCase = stopPointUseCase;
             _dragHandleView = dragHandleView;
@@ -54,6 +56,7 @@ namespace Re.InGame.Presentation.Controller
                 else if (Input.GetMouseButtonDown(1) && _stopPointUseCase.IsStack())
                 {
                     await _playerView.DissolveAsync(token);
+                    _backCountUseCase.Increase();
                     return GameState.Back;
                 }
 

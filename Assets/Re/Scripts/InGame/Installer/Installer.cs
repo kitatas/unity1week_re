@@ -14,6 +14,8 @@ namespace Re.InGame.Installer
     public sealed class Installer : LifetimeScope
     {
         [SerializeField] private StageTable stageTable = default;
+
+        [SerializeField] private BackCountView backCountView = default;
         [SerializeField] private ClearView clearView = default;
         [SerializeField] private DragHandleView dragHandleView = default;
         [SerializeField] private PlayerView playerView = default;
@@ -27,6 +29,7 @@ namespace Re.InGame.Installer
             builder.RegisterInstance<StageTable>(stageTable);
 
             // Entity
+            builder.Register<BackCountEntity>(Lifetime.Scoped);
             builder.Register<ShotCountEntity>(Lifetime.Scoped);
             builder.Register<StageLevelEntity>(Lifetime.Scoped);
             builder.Register<StateEntity>(Lifetime.Scoped);
@@ -36,6 +39,7 @@ namespace Re.InGame.Installer
             builder.Register<StageRepository>(Lifetime.Scoped);
 
             // UseCase
+            builder.Register<BackCountUseCase>(Lifetime.Scoped);
             builder.Register<ShotCountUseCase>(Lifetime.Scoped);
             builder.Register<StageUseCase>(Lifetime.Scoped);
             builder.Register<StateUseCase>(Lifetime.Scoped);
@@ -50,12 +54,14 @@ namespace Re.InGame.Installer
             builder.Register<StateController>(Lifetime.Scoped);
 
             // Presenter
+            builder.RegisterEntryPoint<BackCountPresenter>();
             builder.RegisterEntryPoint<PointStackPresenter>();
             builder.RegisterEntryPoint<ShotCountPresenter>();
             builder.RegisterEntryPoint<StageLevelPresenter>();
             builder.RegisterEntryPoint<StatePresenter>();
 
             // View
+            builder.RegisterInstance<BackCountView>(backCountView);
             builder.RegisterInstance<ClearView>(clearView);
             builder.RegisterInstance<DragHandleView>(dragHandleView);
             builder.RegisterInstance<PlayerView>(playerView);

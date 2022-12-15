@@ -22,8 +22,6 @@ namespace Re.InGame.Presentation.Controller
 
         public override async UniTask InitAsync(CancellationToken token)
         {
-            _clearView.HideAsync(0.0f, token).Forget();
-
             await UniTask.Yield(token);
         }
 
@@ -34,12 +32,9 @@ namespace Re.InGame.Presentation.Controller
             await goal.DisappearAsync(token);
 
             // ステージクリア演出
-            var animationTime = 0.5f;
-            await _clearView.ShowAsync(animationTime, token);
-            await UniTask.Delay(TimeSpan.FromSeconds(1.0f), cancellationToken: token);
-            await _clearView.HideAsync(animationTime, token);
+            await _clearView.ShowAsync(UiConfig.ANIMATION_TIME, token);
 
-            // TODO: 最終ステージである場合
+            // 最終ステージである場合
             if (_stageUseCase.IsAllStageClear())
             {
                 // TODO: game clear

@@ -11,22 +11,36 @@ namespace Re.InGame.Presentation.View
     {
         [SerializeField] private TextMeshProUGUI clearText = default;
 
-        // TODO: 表示演出
         public async UniTask ShowAsync(float animationTime, CancellationToken token)
         {
-            await clearText
-                .DOFade(1.0f, animationTime)
-                .SetLink(gameObject)
-                .WithCancellation(token);
-        }
+            var tasks = new List<UniTask>();
+            var animator = new DOTweenTMPAnimator(clearText);
+            for (int i = 0; i < animator.textInfo.characterCount; i++)
+            {
+                tasks.Add(DOTween.Sequence()
+                    .Append(animator
+                        .DOFadeChar(i, 0.0f, 0.0f))
+                    .Join(animator
+                        .DOOffsetChar(i, Vector3.right * 50f, 0.0f))
+                    .Append(animator
+                        .DOFadeChar(i, 1.0f, animationTime)
+                        .SetDelay(i * 0.05f))
+                    .Join(animator
+                        .DOOffsetChar(i, Vector3.zero, animationTime)
+                        .SetDelay(i * 0.05f))
+                    .AppendInterval(0.5f)
+                    .Append(animator
+                        .DOFadeChar(i, 0.0f, animationTime)
+                        .SetDelay(i * 0.05f))
+                    .Join(animator
+                        .DOOffsetChar(i, Vector3.left * 50f, animationTime)
+                        .SetDelay(i * 0.05f))
+                    .SetLink(gameObject)
+                    .WithCancellation(token)
+                );
+            }
 
-        // TODO: 非表示演出
-        public async UniTask HideAsync(float animationTime, CancellationToken token)
-        {
-            await clearText
-                .DOFade(0.0f, animationTime)
-                .SetLink(gameObject)
-                .WithCancellation(token);
+            await UniTask.WhenAll(tasks);
         }
     }
 }

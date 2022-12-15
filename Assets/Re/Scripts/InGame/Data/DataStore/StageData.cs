@@ -6,9 +6,9 @@ namespace Re.InGame.Data.DataStore
     public sealed class StageData : ScriptableObject
     {
         [SerializeField] private DifficultyType difficultyType = default;
-        [SerializeField] private GameObject stageObject = default;
+        [SerializeField] private Presentation.View.StageView stageView = default;
 
         public DifficultyType type => difficultyType;
-        public GameObject stage => stageObject;
+        public Presentation.View.StageView stage => stageView;
     }
 }

@@ -23,11 +23,9 @@ namespace Re.InGame.Presentation.Controller
 
         public override async UniTask<GameState> TickAsync(CancellationToken token)
         {
-            // TODO: 演出
-            // 仮の待機時間
-            await UniTask.Delay(TimeSpan.FromSeconds(1.0f), cancellationToken: token);
-
-            _stageUseCase.BuildStage();
+            // Stage生成演出
+            await UniTask.Delay(TimeSpan.FromSeconds(0.5f), cancellationToken: token);
+            await _stageUseCase.BuildStageAsync(UiConfig.ANIMATION_TIME, token);
 
             return GameState.Input;
         }

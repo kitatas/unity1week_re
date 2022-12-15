@@ -19,6 +19,21 @@ namespace Re.InGame.Presentation.View
             _spriteGlowEffect = GetComponent<SpriteGlowEffect>();
         }
 
+        public async UniTask AppearAsync(CancellationToken token)
+        {
+            await _spriteRenderer
+                .DOFade(0.0f, 0.0f)
+                .SetLink(gameObject)
+                .WithCancellation(token);
+
+            await (
+                _spriteRenderer
+                    .DOFade(1.0f, _dissolveTime)
+                    .SetLink(gameObject)
+                    .WithCancellation(token)
+            );
+        }
+
         public async UniTask DisappearAsync(CancellationToken token)
         {
             await (

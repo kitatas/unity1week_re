@@ -1,5 +1,4 @@
 using Re.InGame.Data.DataStore;
-using UnityEngine;
 
 namespace Re.InGame.Domain.Repository
 {
@@ -12,7 +11,7 @@ namespace Re.InGame.Domain.Repository
             _stageTable = stageTable;
         }
 
-        public GameObject FindByLevel(int level)
+        public Presentation.View.StageView FindByLevel(int level)
         {
             var stageData = _stageTable.data[level];
             return stageData.stage;

@@ -22,13 +22,29 @@ namespace Re.InGame.Presentation.View
 
         public async UniTask<Vector2> SetUpAsync(Vector2 playerPosition, CancellationToken token)
         {
-            await _beginDragTrigger.OnBeginDragAsync(token);
+            var (index, _, _) = await UniTask.WhenAny(
+                _beginDragTrigger.OnBeginDragAsync(token),
+                ReleasePointerAsync(token)
+            );
+
+            // PointerUpされていた場合
+            if (index == 1)
+            {
+                return Vector2.zero;
+            }
 
             _handleView = Instantiate(handleView, transform.parent);
             _handleView.SetUp(playerPosition);
 
-            var pointerEventData =  await _endDragTrigger.OnEndDragAsync(token);
+            var pointerEventData = await _endDragTrigger.OnEndDragAsync(token);
             return pointerEventData.GetDragDiff();
+        }
+
+        private async UniTask<PointerEventData> ReleasePointerAsync(CancellationToken token)
+        {
+            await UniTask.WaitUntil(() => Input.GetMouseButtonUp(0), cancellationToken: token);
+
+            return new PointerEventData(EventSystem.current);
         }
 
         public void OnDrag(PointerEventData eventData)

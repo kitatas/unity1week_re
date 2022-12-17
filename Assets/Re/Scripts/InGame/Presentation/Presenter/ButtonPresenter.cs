@@ -24,7 +24,7 @@ namespace Re.InGame.Presentation.Presenter
         {
             foreach (var buttonView in Object.FindObjectsOfType<BaseButtonView>())
             {
-                buttonView.Init();
+                buttonView.Init(_soundUseCase.SetUpPlaySe);
 
                 if (buttonView is LoadButtonView loadButtonView)
                 {

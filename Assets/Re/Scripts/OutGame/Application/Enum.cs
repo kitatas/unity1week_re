@@ -14,5 +14,6 @@ namespace Re.OutGame
     public enum SeType
     {
         None,
+        Button,
     }
 }

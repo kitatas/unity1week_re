@@ -13,7 +13,7 @@ namespace Re.Common.Presentation.View
 
         private readonly float _animationTime = 0.1f;
 
-        public void Init()
+        public void Init(Action<OutGame.SeType> playSe)
         {
             var rectTransform = transform.ConvertRectTransform();
             var scale = rectTransform.localScale;
@@ -27,6 +27,8 @@ namespace Re.Common.Presentation.View
                         .Append(rectTransform
                             .DOScale(scale, _animationTime))
                         .SetLink(gameObject);
+
+                    playSe?.Invoke(OutGame.SeType.Button);
                 })
                 .AddTo(this);
         }

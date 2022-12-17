@@ -29,7 +29,7 @@ namespace Re.OutGame.Domain.Repository
         public SeData Find(SeType type)
         {
             var data = _seTable.data.Find(x => x.type == type);
-            if (data)
+            if (data == null)
             {
                 throw new Exception($"se data is null. (type: {type})");
             }

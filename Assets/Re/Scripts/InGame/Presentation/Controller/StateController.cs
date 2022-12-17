@@ -9,10 +9,12 @@ namespace Re.InGame.Presentation.Controller
     {
         private readonly List<BaseState> _states;
 
-        public StateController(SetUpState setUpState, InputState inputState, JudgeState judgeState, BackState backState, GoalState goalState)
+        public StateController(TitleState titleState, SetUpState setUpState, InputState inputState,
+            JudgeState judgeState, BackState backState, GoalState goalState)
         {
             _states = new List<BaseState>
             {
+                titleState,
                 setUpState,
                 inputState,
                 judgeState,

@@ -6,7 +6,7 @@ namespace Re.InGame.Data.Entity
     {
         public StateEntity()
         {
-            Set(GameState.SetUp);
+            Set(GameState.Title);
         }
     }
 }

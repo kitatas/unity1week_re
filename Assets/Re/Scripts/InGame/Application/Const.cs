@@ -1,5 +1,10 @@
 namespace Re.InGame
 {
+    public sealed class ProjectConfig
+    {
+        public const string GAME_ID = "re_golf";
+    }
+    
     public sealed class StageConfig
     {
         public const int STAGE_COUNT = 10;

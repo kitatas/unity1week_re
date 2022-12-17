@@ -28,20 +28,6 @@ namespace Re.InGame.Presentation.Controller
         {
             _resultView.HideAsync(0.0f, token).Forget();
 
-            _resultView.pushTweet
-                .Subscribe(_ =>
-                {
-                    // TODO: Tweet
-                })
-                .AddTo(_resultView);
-
-            // _resultView.pushRanking
-            //     .Subscribe(_ =>
-            //     {
-            //         // TODO: Ranking
-            //     })
-            //     .AddTo(_resultView);
-
             await UniTask.Yield(token);
         }
 
@@ -52,7 +38,17 @@ namespace Re.InGame.Presentation.Controller
 
             // ランキングシーンのload
             var score = _scoreUseCase.GetTotalScore();
-            // RankingLoader.Instance.SendScoreAndShowRanking(score);
+
+            // Tweet
+            {
+                var message = $"スコア: {score}\n";
+                message += $"#{ProjectConfig.GAME_ID} #unity1week\n";
+                _resultView.pushTweet
+                    .Subscribe(_ => { UnityRoomTweet.Tweet(ProjectConfig.GAME_ID, message); })
+                    .AddTo(_resultView);
+            }
+
+            RankingLoader.Instance.SendScoreAndShowRanking(score);
 
             // 結果表示演出
             await _resultView.ShowClearBonusAsync(_scoreUseCase.GetClearBonusStr(), token);
@@ -64,7 +60,7 @@ namespace Re.InGame.Presentation.Controller
             await _resultView.closeResult.ToUniTask(true, token);
 
             // ランキングシーンのunload
-            // await UnityEngine.SceneManagement.SceneManager.UnloadSceneAsync("Ranking");
+            await UnityEngine.SceneManagement.SceneManager.UnloadSceneAsync("Ranking");
 
             // タイトルに戻る
             _sceneUseCase.SetUpLoad(OutGame.SceneName.Main);

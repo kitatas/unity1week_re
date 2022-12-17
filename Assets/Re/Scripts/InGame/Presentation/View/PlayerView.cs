@@ -65,7 +65,6 @@ namespace Re.InGame.Presentation.View
 
         public void Shot(Vector2 direction)
         {
-            
             _rigidbody.velocity = direction * _shotPowerRate;
         }
 

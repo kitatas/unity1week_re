@@ -73,12 +73,11 @@ namespace Re.InGame.Presentation.Controller
 
         public override async UniTask<GameState> TickAsync(CancellationToken token)
         {
-            var animationTime = 0.25f;
-            await _titleView.StartGameAsync(animationTime, token);
+            await _titleView.StartGameAsync(UiConfig.POPUP_TIME, token);
 
-            await _playerView.SetUpAsync(animationTime, token);
+            await _playerView.SetUpAsync(UiConfig.POPUP_TIME, token);
 
-            await _mainView.ShowAsync(animationTime, token);
+            await _mainView.ShowAsync(UiConfig.POPUP_TIME, token);
 
             return GameState.SetUp;
         }

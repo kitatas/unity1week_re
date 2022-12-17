@@ -43,6 +43,15 @@ namespace Re.InGame.Presentation.View
                 .AddTo(this);
         }
 
+        public async UniTask SetUpAsync(float animationTime, CancellationToken token)
+        {
+            await transform
+                .DOScale(Vector3.one, animationTime)
+                .SetEase(Ease.InQuart)
+                .SetLink(gameObject)
+                .WithCancellation(token);
+        }
+
         public Vector2 position => transform.position;
 
         public Vector3 rotation => transform.rotation.eulerAngles;

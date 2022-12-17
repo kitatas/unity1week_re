@@ -6,11 +6,13 @@ namespace Re.InGame.Presentation.Controller
 {
     public sealed class TitleState : BaseState
     {
+        private readonly PlayerView _playerView;
         private readonly TitleView _titleView;
         private readonly MainView _mainView;
 
-        public TitleState(TitleView titleView, MainView mainView)
+        public TitleState(PlayerView playerView, TitleView titleView, MainView mainView)
         {
+            _playerView = playerView;
             _titleView = titleView;
             _mainView = mainView;
         }
@@ -29,6 +31,8 @@ namespace Re.InGame.Presentation.Controller
         {
             var animationTime = 0.25f;
             await _titleView.StartGameAsync(animationTime, token);
+
+            await _playerView.SetUpAsync(animationTime, token);
 
             await _mainView.ShowAsync(animationTime, token);
 

@@ -16,6 +16,7 @@ namespace Re.InGame.Presentation.View
         private Rigidbody2D _rigidbody;
         private SpriteRenderer _spriteRenderer;
         private SpriteGlowEffect _spriteGlowEffect;
+        private TrailRenderer _trailRenderer;
 
         private readonly float _shotPowerRate = 0.05f;
         private static readonly int _threshold = Shader.PropertyToID("_Threshold");
@@ -27,6 +28,7 @@ namespace Re.InGame.Presentation.View
             _rigidbody = GetComponent<Rigidbody2D>();
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _spriteGlowEffect = GetComponent<SpriteGlowEffect>();
+            _trailRenderer = GetComponent<TrailRenderer>();
 
             isGoal = false;
 
@@ -80,6 +82,7 @@ namespace Re.InGame.Presentation.View
 
         public async UniTask DissolveAsync(float animationTime, CancellationToken token)
         {
+            _trailRenderer.enabled = false;
             var dissolveTime = animationTime / 2.0f;
 
             await DOTween.To(
@@ -121,6 +124,8 @@ namespace Re.InGame.Presentation.View
                     dissolveTime)
                 .SetLink(gameObject)
                 .WithCancellation(token);
+
+            _trailRenderer.enabled = true;
         }
 
         public void Activate(bool value)

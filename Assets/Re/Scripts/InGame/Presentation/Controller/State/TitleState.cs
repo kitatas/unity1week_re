@@ -10,14 +10,16 @@ namespace Re.InGame.Presentation.Controller
         private readonly PlayerView _playerView;
         private readonly TitleView _titleView;
         private readonly ConfigView _configView;
+        private readonly LicenseView _licenseView;
         private readonly MainView _mainView;
 
-        public TitleState(PlayerView playerView, TitleView titleView, ConfigView configView,
+        public TitleState(PlayerView playerView, TitleView titleView, ConfigView configView, LicenseView licenseView,
             MainView mainView)
         {
             _playerView = playerView;
             _titleView = titleView;
             _configView = configView;
+            _licenseView = licenseView;
             _mainView = mainView;
         }
 
@@ -27,6 +29,7 @@ namespace Re.InGame.Presentation.Controller
         {
             _titleView.ShowAsync(0.0f, token).Forget();
             _configView.HideAsync(0.0f, token).Forget();
+            _licenseView.HideAsync(0.0f, token).Forget();
             _mainView.HideAsync(0.0f, token).Forget();
 
             _configView.pushConfig
@@ -46,6 +49,24 @@ namespace Re.InGame.Presentation.Controller
                     _playerView.Activate(true);
                 })
                 .AddTo(_configView);
+
+            _licenseView.pushLicense
+                .Subscribe(_ =>
+                {
+                    _licenseView.ShowAsync(UiConfig.POPUP_TIME, token).Forget();
+                    _titleView.HideAsync(UiConfig.POPUP_TIME, token).Forget();
+                    _playerView.Activate(false);
+                })
+                .AddTo(_licenseView);
+
+            _licenseView.closeLicense
+                .Subscribe(_ =>
+                {
+                    _licenseView.HideAsync(UiConfig.POPUP_TIME, token).Forget();
+                    _titleView.ShowAsync(UiConfig.POPUP_TIME, token).Forget();
+                    _playerView.Activate(true);
+                })
+                .AddTo(_licenseView);
 
             await UniTask.Yield(token);
         }

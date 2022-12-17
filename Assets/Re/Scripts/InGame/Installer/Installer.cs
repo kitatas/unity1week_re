@@ -19,6 +19,7 @@ namespace Re.InGame.Installer
         [SerializeField] private ClearView clearView = default;
         [SerializeField] private ConfigView configView = default;
         [SerializeField] private DragHandleView dragHandleView = default;
+        [SerializeField] private LicenseView licenseView = default;
         [SerializeField] private MainView mainView = default;
         [SerializeField] private PlayerView playerView = default;
         [SerializeField] private PointStackView pointStackView = default;
@@ -70,6 +71,7 @@ namespace Re.InGame.Installer
             builder.RegisterInstance<ClearView>(clearView);
             builder.RegisterInstance<ConfigView>(configView);
             builder.RegisterInstance<DragHandleView>(dragHandleView);
+            builder.RegisterInstance<LicenseView>(licenseView);
             builder.RegisterInstance<MainView>(mainView);
             builder.RegisterInstance<PlayerView>(playerView);
             builder.RegisterInstance<PointStackView>(pointStackView);

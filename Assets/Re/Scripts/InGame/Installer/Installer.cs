@@ -55,6 +55,7 @@ namespace Re.InGame.Installer
 
             // Presenter
             builder.RegisterEntryPoint<BackCountPresenter>();
+            builder.RegisterEntryPoint<ButtonPresenter>();
             builder.RegisterEntryPoint<PointStackPresenter>();
             builder.RegisterEntryPoint<ShotCountPresenter>();
             builder.RegisterEntryPoint<StageLevelPresenter>();

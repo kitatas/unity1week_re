@@ -5,4 +5,14 @@ namespace Re.OutGame
         None,
         Main,
     }
+
+    public enum BgmType
+    {
+        None,
+    }
+
+    public enum SeType
+    {
+        None,
+    }
 }

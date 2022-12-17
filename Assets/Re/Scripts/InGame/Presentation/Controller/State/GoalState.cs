@@ -1,4 +1,3 @@
-using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using Re.InGame.Domain.UseCase;
@@ -37,9 +36,7 @@ namespace Re.InGame.Presentation.Controller
             // 最終ステージである場合
             if (_stageUseCase.IsAllStageClear())
             {
-                // TODO: game clear
-                UnityEngine.Debug.Log($"game clear!!");
-                return GameState.None;
+                return GameState.Result;
             }
             else
             {

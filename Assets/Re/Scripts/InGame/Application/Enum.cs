@@ -9,6 +9,7 @@ namespace Re.InGame
         Judge,
         Back,
         Goal,
+        Result,
     }
 
     public enum DifficultyType

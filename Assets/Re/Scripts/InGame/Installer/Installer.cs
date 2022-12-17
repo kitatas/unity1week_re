@@ -45,6 +45,7 @@ namespace Re.InGame.Installer
 
             // UseCase
             builder.Register<BackCountUseCase>(Lifetime.Scoped);
+            builder.Register<ScoreUseCase>(Lifetime.Scoped);
             builder.Register<ShotCountUseCase>(Lifetime.Scoped);
             builder.Register<StageUseCase>(Lifetime.Scoped);
             builder.Register<StateUseCase>(Lifetime.Scoped);

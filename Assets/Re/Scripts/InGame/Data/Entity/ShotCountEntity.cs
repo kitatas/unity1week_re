@@ -13,5 +13,10 @@ namespace Re.InGame.Data.Entity
         {
             Set(value + 1);
         }
+
+        public int GetScore()
+        {
+            return value * ScoreConfig.SHOT_BONUS_RATE;
+        }
     }
 }

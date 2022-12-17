@@ -18,7 +18,6 @@ namespace Re.InGame.Presentation.View
         private SpriteGlowEffect _spriteGlowEffect;
 
         private readonly float _shotPowerRate = 0.05f;
-        private readonly float _dissolveTime = 0.25f;
         private static readonly int _threshold = Shader.PropertyToID("_Threshold");
 
         public bool isGoal { get; private set; }
@@ -79,13 +78,15 @@ namespace Re.InGame.Presentation.View
             return false;
         }
 
-        public async UniTask DissolveAsync(CancellationToken token)
+        public async UniTask DissolveAsync(float animationTime, CancellationToken token)
         {
+            var dissolveTime = animationTime / 2.0f;
+
             await DOTween.To(
                     () => _spriteGlowEffect.OutlineWidth,
                     x => _spriteGlowEffect.OutlineWidth = x,
                     0,
-                    _dissolveTime)
+                    dissolveTime)
                 .SetLink(gameObject)
                 .WithCancellation(token);
             _spriteGlowEffect.enabled = false;
@@ -95,18 +96,20 @@ namespace Re.InGame.Presentation.View
                     () => _spriteRenderer.material.GetFloat(_threshold),
                     x => _spriteRenderer.material.SetFloat(_threshold, x),
                     1.0f,
-                    _dissolveTime)
+                    dissolveTime)
                 .SetLink(gameObject)
                 .WithCancellation(token);
         }
 
-        public async UniTask AppearAsync(CancellationToken token)
+        public async UniTask AppearAsync(float animationTime, CancellationToken token)
         {
+            var dissolveTime = animationTime / 2.0f;
+
             await DOTween.To(
                     () => _spriteRenderer.material.GetFloat(_threshold),
                     x => _spriteRenderer.material.SetFloat(_threshold, x),
                     0.0f,
-                    _dissolveTime)
+                    dissolveTime)
                 .SetLink(gameObject)
                 .WithCancellation(token);
 
@@ -115,7 +118,7 @@ namespace Re.InGame.Presentation.View
                     () => _spriteGlowEffect.OutlineWidth,
                     x => _spriteGlowEffect.OutlineWidth = x,
                     10,
-                    _dissolveTime)
+                    dissolveTime)
                 .SetLink(gameObject)
                 .WithCancellation(token);
         }

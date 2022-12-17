@@ -55,7 +55,7 @@ namespace Re.InGame.Presentation.Controller
                 }
                 else if (Input.GetMouseButtonDown(1) && _stopPointUseCase.IsStack())
                 {
-                    await _playerView.DissolveAsync(token);
+                    await _playerView.DissolveAsync(PlayerConfig.DISSOLVE_TIME, token);
                     _backCountUseCase.Increase();
                     return GameState.Back;
                 }

@@ -29,7 +29,7 @@ namespace Re.InGame.Presentation.Controller
 
             var pointEntity = _stopPointUseCase.Pop();
             _playerView.SetPoint(pointEntity);
-            await _playerView.AppearAsync(token);
+            await _playerView.AppearAsync(PlayerConfig.DISSOLVE_TIME, token);
 
             return GameState.Judge;
         }

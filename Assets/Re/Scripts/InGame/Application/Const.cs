@@ -9,4 +9,9 @@ namespace Re.InGame
     {
         public const float ANIMATION_TIME = 0.5f;
     }
+
+    public sealed class PlayerConfig
+    {
+        public const float DISSOLVE_TIME = 0.5f;
+    }
 }

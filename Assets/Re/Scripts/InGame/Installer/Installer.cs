@@ -17,6 +17,7 @@ namespace Re.InGame.Installer
 
         [SerializeField] private BackCountView backCountView = default;
         [SerializeField] private ClearView clearView = default;
+        [SerializeField] private ConfigView configView = default;
         [SerializeField] private DragHandleView dragHandleView = default;
         [SerializeField] private MainView mainView = default;
         [SerializeField] private PlayerView playerView = default;
@@ -67,6 +68,7 @@ namespace Re.InGame.Installer
             // View
             builder.RegisterInstance<BackCountView>(backCountView);
             builder.RegisterInstance<ClearView>(clearView);
+            builder.RegisterInstance<ConfigView>(configView);
             builder.RegisterInstance<DragHandleView>(dragHandleView);
             builder.RegisterInstance<MainView>(mainView);
             builder.RegisterInstance<PlayerView>(playerView);

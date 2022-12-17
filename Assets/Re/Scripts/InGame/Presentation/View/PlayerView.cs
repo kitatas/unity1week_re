@@ -122,5 +122,10 @@ namespace Re.InGame.Presentation.View
                 .SetLink(gameObject)
                 .WithCancellation(token);
         }
+
+        public void Activate(bool value)
+        {
+            gameObject.SetActive(value);
+        }
     }
 }

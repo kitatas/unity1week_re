@@ -8,6 +8,7 @@ namespace Re.InGame
     public sealed class UiConfig
     {
         public const float ANIMATION_TIME = 0.5f;
+        public const float POPUP_TIME = 0.25f;
     }
 
     public sealed class PlayerConfig

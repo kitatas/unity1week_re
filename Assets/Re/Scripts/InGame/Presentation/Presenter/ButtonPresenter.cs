@@ -1,3 +1,4 @@
+using Re.Common.Presentation.View;
 using Re.InGame.Presentation.View;
 using UniRx;
 using UnityEngine;
@@ -16,13 +17,16 @@ namespace Re.InGame.Presentation.Presenter
 
         public void Initialize()
         {
-            foreach (var loadButtonView in Object.FindObjectsOfType<LoadButtonView>())
+            foreach (var buttonView in Object.FindObjectsOfType<BaseButtonView>())
             {
-                Debug.Log($"init load button: {loadButtonView.gameObject.name}");
-                
-                loadButtonView.Push()
-                    .Subscribe(_sceneUseCase.SetUpLoad)
-                    .AddTo(loadButtonView);
+                buttonView.Init();
+
+                if (buttonView is LoadButtonView loadButtonView)
+                {
+                    loadButtonView.Push()
+                        .Subscribe(_sceneUseCase.SetUpLoad)
+                        .AddTo(loadButtonView);
+                }
             }
         }
     }

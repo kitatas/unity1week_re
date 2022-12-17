@@ -26,6 +26,7 @@ namespace Re.InGame.Installer
         [SerializeField] private ShotCountView shotCountView = default;
         [SerializeField] private StageLevelView stageLevelView = default;
         [SerializeField] private TitleView titleView = default;
+        [SerializeField] private VolumeView volumeView = default;
 
         protected override void Configure(IContainerBuilder builder)
         {
@@ -78,6 +79,7 @@ namespace Re.InGame.Installer
             builder.RegisterInstance<ShotCountView>(shotCountView);
             builder.RegisterInstance<StageLevelView>(stageLevelView);
             builder.RegisterInstance<TitleView>(titleView);
+            builder.RegisterInstance<VolumeView>(volumeView);
         }
     }
 }

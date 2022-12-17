@@ -9,10 +9,15 @@ namespace Re.InGame.Presentation.Presenter
     public sealed class ButtonPresenter : IInitializable
     {
         private readonly OutGame.Domain.UseCase.SceneUseCase _sceneUseCase;
+        private readonly OutGame.Domain.UseCase.SoundUseCase _soundUseCase;
+        private readonly VolumeView _volumeView;
 
-        public ButtonPresenter(OutGame.Domain.UseCase.SceneUseCase sceneUseCase)
+        public ButtonPresenter(OutGame.Domain.UseCase.SceneUseCase sceneUseCase,
+            OutGame.Domain.UseCase.SoundUseCase soundUseCase, VolumeView volumeView)
         {
             _sceneUseCase = sceneUseCase;
+            _soundUseCase = soundUseCase;
+            _volumeView = volumeView;
         }
 
         public void Initialize()
@@ -28,6 +33,24 @@ namespace Re.InGame.Presentation.Presenter
                         .AddTo(loadButtonView);
                 }
             }
+
+            _volumeView.Init(_soundUseCase.bgmVolume, _soundUseCase.seVolume);
+
+            _volumeView.UpdateBgmVolume()
+                .Subscribe(_soundUseCase.SetBgmVolume)
+                .AddTo(_volumeView);
+
+            _volumeView.UpdateSeVolume()
+                .Subscribe(_soundUseCase.SetSeVolume)
+                .AddTo(_volumeView);
+
+            _volumeView.OnPointerUpBgmSlider()
+                .Subscribe(_soundUseCase.SetUpPlaySe)
+                .AddTo(_volumeView);
+
+            _volumeView.OnPointerUpSeSlider()
+                .Subscribe(_soundUseCase.SetUpPlaySe)
+                .AddTo(_volumeView);
         }
     }
 }

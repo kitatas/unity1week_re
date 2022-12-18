@@ -78,7 +78,7 @@ namespace Re.InGame.Presentation.View
 
         public bool IsStop()
         {
-            if (_rigidbody.velocity.magnitude <= 0.1f)
+            if (_rigidbody.velocity.magnitude <= 0.2f)
             {
                 _rigidbody.velocity = Vector2.zero;
                 return true;

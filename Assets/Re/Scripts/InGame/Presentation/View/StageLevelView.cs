@@ -10,7 +10,7 @@ namespace Re.InGame.Presentation.View
 
         public override void Render(int value)
         {
-            countText.text = $"{value:000}";
+            countText.text = $"{value + 1:00} / {StageConfig.STAGE_COUNT:00}";
         }
     }
 }

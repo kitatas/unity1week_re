@@ -16,7 +16,7 @@ namespace Re.InGame.Data.Entity
 
         public int GetScore()
         {
-            return value * ScoreConfig.SHOT_BONUS_RATE;
+            return ScoreConfig.SHOT_BONUS - (value * ScoreConfig.SHOT_BONUS_RATE);
         }
     }
 }

@@ -18,19 +18,9 @@ namespace Re.InGame.Domain.UseCase
             return $"+{ScoreConfig.CLEAR_BONUS}";
         }
 
-        public string GetShotCalcStr()
-        {
-            return $"-{ScoreConfig.SHOT_BONUS_RATE} × {_shotCountEntity.value}";
-        }
-
         public string GetShotBonusStr()
         {
-            return $"-{_shotCountEntity.GetScore()}";
-        }
-
-        public string GetBackCalcStr()
-        {
-            return $"+{ScoreConfig.BACK_BONUS_RATE} × {_backCountEntity.value}";
+            return $"+{_shotCountEntity.GetScore()}";
         }
 
         public string GetBackBonusStr()
@@ -47,8 +37,8 @@ namespace Re.InGame.Domain.UseCase
         {
             return
                 ScoreConfig.CLEAR_BONUS
-                - (ScoreConfig.SHOT_BONUS_RATE * _shotCountEntity.value) // shotのみ減算
-                + (ScoreConfig.BACK_BONUS_RATE * _backCountEntity.value)
+                + _shotCountEntity.GetScore()
+                + _backCountEntity.GetScore()
                 + ScoreConfig.PLAY_BONUS;
         }
     }

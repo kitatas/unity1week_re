@@ -54,8 +54,8 @@ namespace Re.InGame.Presentation.Controller
 
             // 結果表示演出
             await _resultView.ShowClearBonusAsync(_scoreUseCase.GetClearBonusStr(), token);
-            await _resultView.ShowShotBonusAsync(_scoreUseCase.GetShotCalcStr(), _scoreUseCase.GetShotBonusStr(), token);
-            await _resultView.ShowBackBonusAsync(_scoreUseCase.GetBackCalcStr(), _scoreUseCase.GetBackBonusStr(), token);
+            await _resultView.ShowShotBonusAsync(_scoreUseCase.GetShotBonusStr(), token);
+            await _resultView.ShowBackBonusAsync(_scoreUseCase.GetBackBonusStr(), token);
             await _resultView.ShowPlayBonusAsync(_scoreUseCase.GetPlayBonusStr(), token);
             await _resultView.TweenScoreAsync(score, token);
             await _resultView.ShowCloseButtonAsync(UiConfig.ANIMATION_TIME, token);

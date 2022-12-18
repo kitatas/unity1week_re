@@ -19,10 +19,8 @@ namespace Re.InGame.Presentation.View
         [SerializeField] private TextMeshProUGUI clearBonusText = default;
         [SerializeField] private TextMeshProUGUI clearBonusValueText = default;
         [SerializeField] private TextMeshProUGUI shotBonusText = default;
-        [SerializeField] private TextMeshProUGUI shotBonusCalcText = default;
         [SerializeField] private TextMeshProUGUI shotBonusValueText = default;
         [SerializeField] private TextMeshProUGUI backBonusText = default;
-        [SerializeField] private TextMeshProUGUI backBonusCalcText = default;
         [SerializeField] private TextMeshProUGUI backBonusValueText = default;
         [SerializeField] private TextMeshProUGUI playBonusText = default;
         [SerializeField] private TextMeshProUGUI playBonusValueText = default;
@@ -61,25 +59,17 @@ namespace Re.InGame.Presentation.View
             await TweenBonusScoreAsync(clearBonusValueText, token);
         }
 
-        public async UniTask ShowShotBonusAsync(string shotCalc, string shotBonus, CancellationToken token)
+        public async UniTask ShowShotBonusAsync(string shotBonus, CancellationToken token)
         {
-            shotBonusCalcText.text = $"{shotCalc}";
-            await (
-                ShowBonusTextAsync(shotBonusText, token),
-                ShowBonusTextAsync(shotBonusCalcText, token)
-            );
+            await ShowBonusTextAsync(shotBonusText, token);
 
             shotBonusValueText.text = $"{shotBonus}";
             await TweenBonusScoreAsync(shotBonusValueText, token);
         }
 
-        public async UniTask ShowBackBonusAsync(string backCalc, string backBonus, CancellationToken token)
+        public async UniTask ShowBackBonusAsync(string backBonus, CancellationToken token)
         {
-            backBonusCalcText.text = $"{backCalc}";
-            await (
-                ShowBonusTextAsync(backBonusText, token),
-                ShowBonusTextAsync(backBonusCalcText, token)
-            );
+            await ShowBonusTextAsync(backBonusText, token);
 
             backBonusValueText.text = $"{backBonus}";
             await TweenBonusScoreAsync(backBonusValueText, token);

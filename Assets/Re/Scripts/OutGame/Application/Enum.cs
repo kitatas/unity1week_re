@@ -21,5 +21,7 @@ namespace Re.OutGame
         Goal,
         Hit,
         Clear,
+        Score,
+        Result,
     }
 }

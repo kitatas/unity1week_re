@@ -28,8 +28,12 @@ namespace Re.InGame.Presentation.View
         [SerializeField] private TextMeshProUGUI playBonusValueText = default;
         [SerializeField] private TextMeshProUGUI scoreText = default;
 
-        public async UniTask InitAsync(CancellationToken token)
+        private Action<OutGame.SeType> _playSe;
+
+        public async UniTask InitAsync(Action<OutGame.SeType> playSe, CancellationToken token)
         {
+            _playSe = playSe;
+
             await (
                 HideAsync(0.0f, token),
                 HideCloseButtonAsync(0.0f, token)
@@ -122,6 +126,7 @@ namespace Re.InGame.Presentation.View
                 );
             }
 
+            _playSe?.Invoke(OutGame.SeType.Clear);
             await UniTask.WhenAll(tasks);
             await UniTask.Delay(TimeSpan.FromSeconds(UiConfig.ANIMATION_TIME), cancellationToken: token);
         }
@@ -133,6 +138,7 @@ namespace Re.InGame.Presentation.View
                 .Subscribe(x => scoreText.text = $"{x}")
                 .AddTo(this);
 
+            _playSe?.Invoke(OutGame.SeType.Score);
             await DOTween.To(
                     () => tweenScore.Value,
                     x => tweenScore.Value = x,
@@ -142,6 +148,8 @@ namespace Re.InGame.Presentation.View
                 .SetEase(Ease.Linear)
                 .SetLink(gameObject)
                 .WithCancellation(token);
+
+            _playSe?.Invoke(OutGame.SeType.Result);
         }
 
         public async UniTask ShowCloseButtonAsync(float animationTime, CancellationToken token)

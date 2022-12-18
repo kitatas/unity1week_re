@@ -9,14 +9,16 @@ namespace Re.InGame.Presentation.Controller
     public sealed class ResultState : BaseState
     {
         private readonly OutGame.Domain.UseCase.SceneUseCase _sceneUseCase;
+        private readonly OutGame.Domain.UseCase.SoundUseCase _soundUseCase;
         private readonly ScoreUseCase _scoreUseCase;
         private readonly PlayerView _playerView;
         private readonly ResultView _resultView;
 
         public ResultState(OutGame.Domain.UseCase.SceneUseCase sceneUseCase, ScoreUseCase scoreUseCase,
-            PlayerView playerView, ResultView resultView)
+            OutGame.Domain.UseCase.SoundUseCase soundUseCase, PlayerView playerView, ResultView resultView)
         {
             _sceneUseCase = sceneUseCase;
+            _soundUseCase = soundUseCase;
             _scoreUseCase = scoreUseCase;
             _playerView = playerView;
             _resultView = resultView;
@@ -26,7 +28,7 @@ namespace Re.InGame.Presentation.Controller
 
         public override async UniTask InitAsync(CancellationToken token)
         {
-            _resultView.InitAsync(token).Forget();
+            _resultView.InitAsync(_soundUseCase.SetUpPlaySe, token).Forget();
 
             await UniTask.Yield(token);
         }

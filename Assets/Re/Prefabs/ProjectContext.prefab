@@ -48,3 +48,5 @@ MonoBehaviour:
     TypeName: 
   autoRun: 1
   autoInjectGameObjects: []
+  bgmTable: {fileID: 11400000, guid: a478e74a551d64be0a5f4e4d29190014, type: 2}
+  seTable: {fileID: 11400000, guid: a24071de39a0c4ee8a418b00890b1690, type: 2}

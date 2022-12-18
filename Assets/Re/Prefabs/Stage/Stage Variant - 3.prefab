@@ -55,6 +55,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stage Variant - 3
       objectReference: {fileID: 0}
+    - target: {fileID: 5734030256630550108, guid: 39cff2988accd4bedbfd55a2be4acd77, type: 3}
+      propertyPath: stageObjectViews.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5734030256630550108, guid: 39cff2988accd4bedbfd55a2be4acd77, type: 3}
+      propertyPath: stageObjectViews.Array.data[0]
+      value: 
+      objectReference: {fileID: 8993309272852977586}
     - target: {fileID: 6496084654346952448, guid: 39cff2988accd4bedbfd55a2be4acd77, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6
@@ -139,3 +147,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 481a31981b57e471fae195d6166e5c14, type: 3}
+--- !u!114 &8993309272852977586 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4175650829343918205, guid: 481a31981b57e471fae195d6166e5c14, type: 3}
+  m_PrefabInstance: {fileID: 4988936621957898191}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1333b3f06b14b318f7e65d7d40dfd7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

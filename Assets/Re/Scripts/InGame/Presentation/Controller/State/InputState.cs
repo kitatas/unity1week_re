@@ -8,15 +8,18 @@ namespace Re.InGame.Presentation.Controller
 {
     public sealed class InputState : BaseState
     {
+        private readonly OutGame.Domain.UseCase.SoundUseCase _soundUseCase;
         private readonly BackCountUseCase _backCountUseCase;
         private readonly ShotCountUseCase _shotCountUseCase;
         private readonly StopPointUseCase _stopPointUseCase;
         private readonly DragHandleView _dragHandleView;
         private readonly PlayerView _playerView;
 
-        public InputState(BackCountUseCase backCountUseCase, ShotCountUseCase shotCountUseCase, StopPointUseCase stopPointUseCase,
+        public InputState(OutGame.Domain.UseCase.SoundUseCase soundUseCase,
+            BackCountUseCase backCountUseCase, ShotCountUseCase shotCountUseCase, StopPointUseCase stopPointUseCase,
             DragHandleView dragHandleView, PlayerView playerView)
         {
+            _soundUseCase = soundUseCase;
             _backCountUseCase = backCountUseCase;
             _shotCountUseCase = shotCountUseCase;
             _stopPointUseCase = stopPointUseCase;
@@ -29,7 +32,7 @@ namespace Re.InGame.Presentation.Controller
         public override async UniTask InitAsync(CancellationToken token)
         {
             _dragHandleView.Init();
-            _playerView.Init();
+            _playerView.Init(_soundUseCase.SetUpPlaySe);
 
             await UniTask.Yield(token);
         }

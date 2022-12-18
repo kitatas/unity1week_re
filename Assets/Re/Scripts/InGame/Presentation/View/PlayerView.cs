@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
@@ -17,18 +18,20 @@ namespace Re.InGame.Presentation.View
         private SpriteRenderer _spriteRenderer;
         private SpriteGlowEffect _spriteGlowEffect;
         private TrailRenderer _trailRenderer;
+        private Action<OutGame.SeType> _playSe;
 
         private readonly float _shotPowerRate = 0.05f;
         private static readonly int _threshold = Shader.PropertyToID("_Threshold");
 
         public bool isGoal { get; private set; }
 
-        public void Init()
+        public void Init(Action<OutGame.SeType> playSe)
         {
             _rigidbody = GetComponent<Rigidbody2D>();
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _spriteGlowEffect = GetComponent<SpriteGlowEffect>();
             _trailRenderer = GetComponent<TrailRenderer>();
+            _playSe = playSe;
 
             isGoal = false;
 
@@ -41,6 +44,10 @@ namespace Re.InGame.Presentation.View
             this.OnTriggerExit2DAsObservable()
                 .Where(x => x.TryGetComponent(out GoalView goalView))
                 .Subscribe(x => isGoal = false)
+                .AddTo(this);
+
+            this.OnCollisionEnter2DAsObservable()
+                .Subscribe(_ => _playSe?.Invoke(OutGame.SeType.Hit))
                 .AddTo(this);
         }
 
@@ -65,6 +72,7 @@ namespace Re.InGame.Presentation.View
 
         public void Shot(Vector2 direction)
         {
+            _playSe?.Invoke(OutGame.SeType.Shot);
             _rigidbody.velocity = direction * _shotPowerRate;
         }
 
@@ -81,6 +89,8 @@ namespace Re.InGame.Presentation.View
 
         public async UniTask DissolveAsync(float animationTime, CancellationToken token)
         {
+            _playSe?.Invoke(OutGame.SeType.Back);
+
             _trailRenderer.enabled = false;
             var dissolveTime = animationTime / 2.0f;
 

@@ -15,5 +15,10 @@ namespace Re.OutGame
     {
         None,
         Button,
+        Shot,
+        Back,
+        Goal,
+        Hit,
+        Clear,
     }
 }

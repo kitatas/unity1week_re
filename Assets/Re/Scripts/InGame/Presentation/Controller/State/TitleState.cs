@@ -7,15 +7,18 @@ namespace Re.InGame.Presentation.Controller
 {
     public sealed class TitleState : BaseState
     {
+        private readonly OutGame.Domain.UseCase.SoundUseCase _soundUseCase;
         private readonly PlayerView _playerView;
         private readonly TitleView _titleView;
         private readonly ConfigView _configView;
         private readonly LicenseView _licenseView;
         private readonly MainView _mainView;
 
-        public TitleState(PlayerView playerView, TitleView titleView, ConfigView configView, LicenseView licenseView,
+        public TitleState(OutGame.Domain.UseCase.SoundUseCase soundUseCase,
+            PlayerView playerView, TitleView titleView, ConfigView configView, LicenseView licenseView,
             MainView mainView)
         {
+            _soundUseCase = soundUseCase;
             _playerView = playerView;
             _titleView = titleView;
             _configView = configView;
@@ -27,6 +30,8 @@ namespace Re.InGame.Presentation.Controller
 
         public override async UniTask InitAsync(CancellationToken token)
         {
+            _soundUseCase.SetUpPlayBgm(OutGame.BgmType.Main);
+
             _titleView.ShowAsync(0.0f, token).Forget();
             _configView.HideAsync(0.0f, token).Forget();
             _licenseView.HideAsync(0.0f, token).Forget();

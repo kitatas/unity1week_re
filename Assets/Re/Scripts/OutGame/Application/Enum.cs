@@ -9,6 +9,7 @@ namespace Re.OutGame
     public enum BgmType
     {
         None,
+        Main,
     }
 
     public enum SeType

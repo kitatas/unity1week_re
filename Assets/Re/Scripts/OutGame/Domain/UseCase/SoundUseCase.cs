@@ -8,7 +8,7 @@ namespace Re.OutGame.Domain.UseCase
     public sealed class SoundUseCase
     {
         private readonly SoundRepository _soundRepository;
-        private readonly Subject<AudioClip> _playBgm;
+        private readonly ReactiveProperty<AudioClip> _playBgm;
         private readonly Subject<AudioClip> _playSe;
         private readonly ReactiveProperty<float> _bgmVolume;
         private readonly ReactiveProperty<float> _seVolume;
@@ -16,7 +16,7 @@ namespace Re.OutGame.Domain.UseCase
         public SoundUseCase(SoundRepository soundRepository)
         {
             _soundRepository = soundRepository;
-            _playBgm = new Subject<AudioClip>();
+            _playBgm = new ReactiveProperty<AudioClip>();
             _playSe = new Subject<AudioClip>();
             _bgmVolume = new ReactiveProperty<float>(0.5f);
             _seVolume = new ReactiveProperty<float>(0.5f);
@@ -37,7 +37,7 @@ namespace Re.OutGame.Domain.UseCase
                 throw new Exception($"bgm clip is null. (type: {type})");
             }
 
-            _playBgm?.OnNext(clip);
+            _playBgm.Value = clip;
         }
 
         public void SetUpPlaySe(SeType type)

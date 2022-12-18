@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: StageData 8
   m_EditorClassIdentifier: 
   difficultyType: 0
-  stageObject: {fileID: 6642503734237329299, guid: 1f6941737a84147638f8d2b9b0b024c7, type: 3}
+  stageView: {fileID: 1135736617893127959, guid: 1f6941737a84147638f8d2b9b0b024c7, type: 3}

@@ -34,5 +34,12 @@ namespace Re.Common.Presentation.View
         }
 
         public IObservable<Unit> push => button.OnClickAsObservable();
+
+        public Image image => button.image;
+
+        public void Activate(bool value)
+        {
+            button.enabled = value;
+        }
     }
 }

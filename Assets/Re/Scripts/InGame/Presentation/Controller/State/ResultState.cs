@@ -26,7 +26,7 @@ namespace Re.InGame.Presentation.Controller
 
         public override async UniTask InitAsync(CancellationToken token)
         {
-            _resultView.HideAsync(0.0f, token).Forget();
+            _resultView.InitAsync(token).Forget();
 
             await UniTask.Yield(token);
         }
@@ -56,6 +56,7 @@ namespace Re.InGame.Presentation.Controller
             await _resultView.ShowBackBonusAsync(_scoreUseCase.GetBackCalcStr(), _scoreUseCase.GetBackBonusStr(), token);
             await _resultView.ShowPlayBonusAsync(_scoreUseCase.GetPlayBonusStr(), token);
             await _resultView.TweenScoreAsync(score, token);
+            await _resultView.ShowCloseButtonAsync(UiConfig.ANIMATION_TIME, token);
 
             await _resultView.closeResult.ToUniTask(true, token);
 

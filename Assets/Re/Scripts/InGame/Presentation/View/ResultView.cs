@@ -13,7 +13,6 @@ namespace Re.InGame.Presentation.View
     public sealed class ResultView : MonoBehaviour
     {
         [SerializeField] private BaseButtonView tweetButton = default;
-        [SerializeField] private BaseButtonView rankingButton = default;
         [SerializeField] private BaseButtonView closeButton = default;
         [SerializeField] private BaseCanvasGroupView resultCanvas = default;
 
@@ -29,6 +28,14 @@ namespace Re.InGame.Presentation.View
         [SerializeField] private TextMeshProUGUI playBonusValueText = default;
         [SerializeField] private TextMeshProUGUI scoreText = default;
 
+        public async UniTask InitAsync(CancellationToken token)
+        {
+            await (
+                HideAsync(0.0f, token),
+                HideCloseButtonAsync(0.0f, token)
+            );
+        }
+
         public async UniTask ShowAsync(float animationTime, CancellationToken token)
         {
             await resultCanvas.ShowAsync(animationTime, token);
@@ -40,7 +47,6 @@ namespace Re.InGame.Presentation.View
         }
 
         public IObservable<Unit> pushTweet => tweetButton.push;
-        public IObservable<Unit> pushRanking => rankingButton.push;
         public IObservable<Unit> closeResult => closeButton.push;
 
         public async UniTask ShowClearBonusAsync(string clearBonus, CancellationToken token)
@@ -99,7 +105,7 @@ namespace Re.InGame.Presentation.View
             for (int i = 0; i < animator.textInfo.characterCount; i++)
             {
                 var index = animator.textInfo.characterCount - i - 1;
-                
+
                 tasks.Add(DOTween.Sequence()
                     .Append(animator
                         .DOFadeChar(i, 0.0f, 0.0f))
@@ -134,6 +140,36 @@ namespace Re.InGame.Presentation.View
                     UiConfig.ANIMATION_TIME * 2
                 )
                 .SetEase(Ease.Linear)
+                .SetLink(gameObject)
+                .WithCancellation(token);
+        }
+
+        public async UniTask ShowCloseButtonAsync(float animationTime, CancellationToken token)
+        {
+            await DOTween.Sequence()
+                .Append(closeButton.image
+                    .DOFade(1.0f, animationTime)
+                    .SetEase(Ease.Linear))
+                .Join(closeButton.GetComponentInChildren<TextMeshProUGUI>()
+                    .DOFade(1.0f, animationTime)
+                    .SetEase(Ease.Linear))
+                .SetLink(gameObject)
+                .WithCancellation(token);
+
+            closeButton.Activate(true);
+        }
+
+        public async UniTask HideCloseButtonAsync(float animationTime, CancellationToken token)
+        {
+            closeButton.Activate(false);
+
+            await DOTween.Sequence()
+                .Append(closeButton.image
+                    .DOFade(0.0f, animationTime)
+                    .SetEase(Ease.Linear))
+                .Join(closeButton.GetComponentInChildren<TextMeshProUGUI>()
+                    .DOFade(0.0f, animationTime)
+                    .SetEase(Ease.Linear))
                 .SetLink(gameObject)
                 .WithCancellation(token);
         }

@@ -1,7 +1,7 @@
 using Re.OutGame.Domain.UseCase;
 using Re.OutGame.Presentation.View;
 using UniRx;
-using Unity.VisualScripting;
+using VContainer.Unity;
 
 namespace Re.OutGame.Presentation.Presenter
 {

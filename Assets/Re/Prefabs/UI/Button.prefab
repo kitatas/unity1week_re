@@ -175,7 +175,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.75, g: 0.75, b: 0, a: 1}
+    m_HighlightedColor: {r: 0.9, g: 0.9, b: 0.9, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -222,27 +222,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4166091305783480432, guid: 2c4e4a36159934759b179f04e4db2b70, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4166091305783480432, guid: 2c4e4a36159934759b179f04e4db2b70, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4166091305783480432, guid: 2c4e4a36159934759b179f04e4db2b70, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4166091305783480432, guid: 2c4e4a36159934759b179f04e4db2b70, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4166091305783480432, guid: 2c4e4a36159934759b179f04e4db2b70, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 200
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4166091305783480432, guid: 2c4e4a36159934759b179f04e4db2b70, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 50
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4166091305783480432, guid: 2c4e4a36159934759b179f04e4db2b70, type: 3}
       propertyPath: m_LocalPosition.x

@@ -20,7 +20,9 @@ namespace Re.InGame.Domain.UseCase
 
         public string GetShotBonusStr()
         {
-            return $"+{_shotCountEntity.GetScore()}";
+            var score = _shotCountEntity.GetScore();
+            var sign = score < 0 ? "" : "+";
+            return $"{sign}{score}";
         }
 
         public string GetBackBonusStr()

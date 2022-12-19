@@ -3258,6 +3258,7 @@ GameObject:
   - component: {fileID: 503492756}
   - component: {fileID: 503492758}
   - component: {fileID: 503492759}
+  - component: {fileID: 503492760}
   m_Layer: 0
   m_Name: SceneContext
   m_TagString: Untagged
@@ -3291,6 +3292,7 @@ MonoBehaviour:
   playerView: {fileID: 1690871661}
   pointStackView: {fileID: 503492752}
   resultView: {fileID: 503492759}
+  scoreView: {fileID: 503492760}
   shotCountView: {fileID: 503492750}
   stageLevelView: {fileID: 503492751}
   titleView: {fileID: 503492755}
@@ -3467,6 +3469,18 @@ MonoBehaviour:
   tweetButton: {fileID: 921890469}
   closeButton: {fileID: 1612926620}
   resultCanvas: {fileID: 1755748358}
+--- !u!114 &503492760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 503492746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9377a071586485a8e6d45063d3a40a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   clearBonusText: {fileID: 839054438}
   clearBonusValueText: {fileID: 37471577}
   shotBonusText: {fileID: 1270356544}
@@ -6755,7 +6769,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3938184317076620653, guid: 2c4e4a36159934759b179f04e4db2b70, type: 3}
       propertyPath: m_Name
-      value: Text (TMP) - Score
+      value: Text (TMP) - ScoreValue
       objectReference: {fileID: 0}
     - target: {fileID: 4166091305783480432, guid: 2c4e4a36159934759b179f04e4db2b70, type: 3}
       propertyPath: m_Pivot.x
@@ -7155,7 +7169,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3938184317076620653, guid: 2c4e4a36159934759b179f04e4db2b70, type: 3}
       propertyPath: m_Name
-      value: Text (TMP)
+      value: Text (TMP) - Score
       objectReference: {fileID: 0}
     - target: {fileID: 4166091305783480432, guid: 2c4e4a36159934759b179f04e4db2b70, type: 3}
       propertyPath: m_Pivot.x

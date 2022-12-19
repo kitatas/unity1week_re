@@ -13,22 +13,26 @@ namespace Re.InGame.Presentation.Controller
         private readonly ScoreUseCase _scoreUseCase;
         private readonly PlayerView _playerView;
         private readonly ResultView _resultView;
+        private readonly ScoreView _scoreView;
 
         public ResultState(OutGame.Domain.UseCase.SceneUseCase sceneUseCase, ScoreUseCase scoreUseCase,
-            OutGame.Domain.UseCase.SoundUseCase soundUseCase, PlayerView playerView, ResultView resultView)
+            OutGame.Domain.UseCase.SoundUseCase soundUseCase, PlayerView playerView, ResultView resultView,
+            ScoreView scoreView)
         {
             _sceneUseCase = sceneUseCase;
             _soundUseCase = soundUseCase;
             _scoreUseCase = scoreUseCase;
             _playerView = playerView;
             _resultView = resultView;
+            _scoreView = scoreView;
         }
 
         public override GameState state => GameState.Result;
 
         public override async UniTask InitAsync(CancellationToken token)
         {
-            _resultView.InitAsync(_soundUseCase.SetUpPlaySe, token).Forget();
+            _resultView.InitAsync(token).Forget();
+            _scoreView.Init(_soundUseCase.SetUpPlaySe);
 
             await UniTask.Yield(token);
         }
@@ -53,11 +57,11 @@ namespace Re.InGame.Presentation.Controller
             RankingLoader.Instance.SendScoreAndShowRanking(score);
 
             // 結果表示演出
-            await _resultView.ShowClearBonusAsync(_scoreUseCase.GetClearBonusStr(), token);
-            await _resultView.ShowShotBonusAsync(_scoreUseCase.GetShotBonusStr(), token);
-            await _resultView.ShowBackBonusAsync(_scoreUseCase.GetBackBonusStr(), token);
-            await _resultView.ShowPlayBonusAsync(_scoreUseCase.GetPlayBonusStr(), token);
-            await _resultView.TweenScoreAsync(score, token);
+            await _scoreView.ShowClearBonusAsync(_scoreUseCase.GetClearBonusStr(), token);
+            await _scoreView.ShowShotBonusAsync(_scoreUseCase.GetShotBonusStr(), token);
+            await _scoreView.ShowBackBonusAsync(_scoreUseCase.GetBackBonusStr(), token);
+            await _scoreView.ShowPlayBonusAsync(_scoreUseCase.GetPlayBonusStr(), token);
+            await _scoreView.TweenScoreAsync(score, token);
             await _resultView.ShowCloseButtonAsync(UiConfig.ANIMATION_TIME, token);
 
             await _resultView.closeResult.ToUniTask(true, token);

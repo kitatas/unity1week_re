@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using Re.OutGame.Domain.UseCase;
@@ -8,7 +9,7 @@ using VContainer.Unity;
 
 namespace Re.OutGame.Presentation.Presenter
 {
-    public sealed class ScenePresenter : IInitializable
+    public sealed class ScenePresenter : IInitializable, IDisposable
     {
         private readonly SceneUseCase _sceneUseCase;
         private readonly TransitionView _transitionView;
@@ -39,6 +40,12 @@ namespace Re.OutGame.Presentation.Presenter
             await _transitionView.FadeInAsync(SceneConfig.FADE_TIME, token);
             await SceneManager.LoadSceneAsync(sceneName.ToString()).WithCancellation(token);
             await _transitionView.FadeOutAsync(SceneConfig.FADE_TIME, token);
+        }
+
+        public void Dispose()
+        {
+            _tokenSource?.Cancel();
+            _tokenSource?.Dispose();
         }
     }
 }

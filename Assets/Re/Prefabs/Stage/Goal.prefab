@@ -74,10 +74,10 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 785849417
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.92156863, g: 0.27058825, b: 0.37254903, a: 0.16862746}
+  m_Color: {r: 0.92156863, g: 0.27058825, b: 0.37254903, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -128,8 +128,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   glowColor: {r: 0.92156863, g: 0.27058825, b: 0.37254903, a: 1}
-  glowBrightness: 5
-  outlineWidth: 10
+  glowBrightness: 1
+  outlineWidth: 0
   alphaThreshold: 0.95
   drawOutside: 0
   enableInstancing: 0

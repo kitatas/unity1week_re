@@ -30,6 +30,20 @@ namespace Re.InGame.Presentation.View
                 _spriteRenderer
                     .DOFade(1.0f, _dissolveTime)
                     .SetLink(gameObject)
+                    .WithCancellation(token),
+                DOTween.To(
+                        () => _spriteGlowEffect.GlowBrightness,
+                        x => _spriteGlowEffect.GlowBrightness = x,
+                        5.0f,
+                        _dissolveTime)
+                    .SetLink(gameObject)
+                    .WithCancellation(token),
+                DOTween.To(
+                        () => _spriteGlowEffect.OutlineWidth,
+                        x => _spriteGlowEffect.OutlineWidth = x,
+                        10,
+                        _dissolveTime)
+                    .SetLink(gameObject)
                     .WithCancellation(token)
             );
         }
